@@ -5,9 +5,4 @@ class Solution:
         """
         n = len(nums)
         k = k % n
-
-        nums.reverse()
-
-        nums[:k] = reversed(nums[:k])
-
-        nums[k:] = reversed(nums[k:])
+        nums[:] = nums[-k:] + nums[:-k]
