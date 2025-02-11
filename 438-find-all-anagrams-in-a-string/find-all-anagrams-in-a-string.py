@@ -22,4 +22,13 @@ class Solution:
             if count_s == count_p:
                 result.append(i - len_p + 1)
 
-        return result 
+        return result
+
+#        len_s, len_p = len(s), len(p)
+#        result = []
+#        sorted_p = sorted(p)
+#        for i in range(len_s - len_p + 1):
+#            substring = s[i:i + len_p]
+#            if sorted(substring) == sorted_p:
+#                result.append(i)
+#        return result
