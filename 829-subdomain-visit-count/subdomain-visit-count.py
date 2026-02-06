@@ -4,15 +4,14 @@ class Solution:
 
         for cp in cpdomains:
             rep, domains = cp.split()
-            count = int(rep)
             parts = domains.split('.')
 
             for i in range(len(parts)):
                 subdomain = '.'.join(parts[i:])
-                cp_cnt[subdomain] += count
+                cp_cnt[subdomain] += int(rep)
 
         res = []
         for dom, cnt in cp_cnt.items():
             res.append(f"{cnt} {dom}")
         
-        return res
+        return res        
