@@ -4,11 +4,11 @@ class Solution:
         j = int(math.sqrt(c))
 
         while i <= j:
-            ssum = (i ** 2) + (j ** 2)
-            if ssum == c:
-                return True
-            elif ssum > c:
+            s_sum = i ** 2 + j ** 2
+            if s_sum > c:
                 j -= 1
-            else:
+            elif s_sum < c:
                 i += 1
+            else:
+                return True
         return False
