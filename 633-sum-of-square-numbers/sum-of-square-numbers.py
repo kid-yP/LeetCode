@@ -1,15 +1,14 @@
 class Solution:
     def judgeSquareSum(self, c: int) -> bool:
-        a = 0
-        b = int(math.sqrt(c))
+        i = 0
+        j = int(math.sqrt(c))
 
-        while a <= b:
-            curr_sum = a * a + b * b
-            if curr_sum == c:
+        while i <= j:
+            ssum = (i ** 2) + (j ** 2)
+            if ssum == c:
                 return True
-            elif curr_sum < c:
-                a += 1
+            elif ssum > c:
+                j -= 1
             else:
-                b -= 1
-
+                i += 1
         return False
