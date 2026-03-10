@@ -1,14 +1,14 @@
 class Solution:
     def nextGreaterElement(self, nums1: List[int], nums2: List[int]) -> List[int]:
         stack = []
-        greater_map = {}
+        mp = {}
 
         for num in nums2:
-            while stack and stack[-1] < num:
-                greater_map[stack.pop()] = num
+            while stack and num > stack[-1]:
+                mp[stack.pop()] = num
             stack.append(num)
 
         for num in stack:
-            greater_map[num] = -1
+            mp[num] = -1
 
-        return [greater_map[num] for num in nums1]        
+        return [mp[num] for num in nums1]
