@@ -1,16 +1,19 @@
 class Solution:
     def minOperations(self, nums: List[int]) -> int:
         n = len(nums)
+        q = deque()
         operations = 0
-
+        
         for i in range(n):
-            if nums[i] == 0:
-                if i + 2 < n:
-                    nums[i] = 1
-                    nums[i + 1] = 1 - nums[i + 1]
-                    nums[i + 2] = 1 - nums[i + 2]
-                    operations += 1
-                else:
+            while q and q[0] + 3 <= i:
+                q.popleft()
+            
+            effective = nums[i] ^ (len(q) % 2)
+            
+            if effective == 0:
+                if i + 2 >= n:
                     return -1
-
-        return operations 
+                q.append(i)
+                operations += 1
+        
+        return operations
