@@ -1,26 +1,25 @@
 class Solution:
-    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:        
-        adj = [[] for _ in range(numCourses)]
-        indeg = [0] * numCourses
+    def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
+        graph = [[] for _ in range(numCourses)]
+        incoming = [0] * numCourses
+        queue = deque()
+        order = []
         
-        for a, b in prerequisites:
-            adj[b].append(a)
-            indeg[a] += 1
+        for course, pre in prerequisites:
+            graph[pre].append(course)
+            incoming[course] += 1
+
+        for course in range(numCourses):
+            if incoming[course] == 0:
+                queue.append(course)
+
+        while queue:
+            course = queue.popleft()
+            order.append(course)
+
+            for neighbor in graph[course]:
+                incoming[neighbor] -= 1
+                if incoming[neighbor] == 0:
+                    queue.append(neighbor)
         
-        q = deque()
-        for i in range(numCourses):
-            if indeg[i] == 0:
-                q.append(i)
-        
-        res = []
-        
-        while q:
-            u = q.popleft()
-            res.append(u)
-            
-            for v in adj[u]:
-                indeg[v] -= 1
-                if indeg[v] == 0:
-                    q.append(v)
-        
-        return res if len(res) == numCourses else []
+        return order if len(order) == numCourses else []
